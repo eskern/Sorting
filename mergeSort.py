@@ -67,5 +67,4 @@ if __name__ == '__main__':
     print("Example: 1 5 2 6 3 7 4 8")
     input = sys.stdin.read()
     a = list(map(int, input.split()))
-    print(a)
     print(mergeSort(a))
