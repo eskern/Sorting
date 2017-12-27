@@ -2,6 +2,27 @@
 import math
 import sys
 
+# We are basically breaking an array into subarrays until len(subarray) == 1
+# From that point, we merge the subarrays with the merge(b, c) function
+# Doing this builds new (sub)arrays that are sorted, culminating into the sorted array
+# To better visualize the algorithm, think of it this way:
+### We recursively call mergeSort(A) until we have only one element in a subarray of A
+### At the start of the algorithm, we end up with b being assigned to the very first element in A
+### because it is always in the left-half of the subarray of A
+### Thus, we move on to assigning c to an element of A; that element is assigned to the previous recursion's midpoint (mid)
+### which is in the index to the right of our first b
+### We merge(b, c) these two subarrays, thus sorting them into a two-element subarray
+### But what about the other elements?! After merging the first subarray, we sort (via merge(b, c)) the other subarrays
+### thanks to that c variable we left hanging in earlier recursions, so when we try to assign a variable to c,
+### it is clear we call mergeSort(A) again, this time with the upper half of the subarray
+### This upper half is split into left and right halves, reducing to a single element for b and eventually c
+### This process continues until we have a fully sorted list!
+# Hopefully this explanation helped, as I tried to explain it in plain English rather than in algorithm-speak,
+# but there are several visualizations online that help make more sense out of this
+# I recommend this one: https://www.youtube.com/watch?v=_r0gV2hQYf0
+
+# TL;DR MERGESORT ALL THE HALVES-OF-HALVES-OF-HALVES-OF-HALVES....... until done!
+
 def mergeSort(A):
     if len(A) == 1:
         # Base case; if the length of the array is 1,
